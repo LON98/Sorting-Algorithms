@@ -3,6 +3,8 @@
 // sort it using different types of sorting algorithms.
 
 #include <iostream>
+#include <algorithm>
+
 
 static int *makeRandomArray(const int size, const int max, const int seed);
 static void printArrayContents(const int * const array, const int size);
@@ -27,7 +29,7 @@ int main (int argc, char * const argv[])
 	printArrayContents(array, arraySize);
 
 	//bubbleSort(array, arraySize);
-	//shuttleSort(array, arraySize);
+	shuttleSort(array, arraySize);
 	//selectionSort(array, arraySize);
 	//insertionSort(array, arraySize);
 
@@ -59,12 +61,68 @@ static void printArrayContents(const int * const array, const int size)
 
 static void bubbleSort(int *array, const int size)
 {
-	// TODO : implement the bubble sort algorithm
+	for(int n = 0; n < size; n++)
+	{
+        for(int i = 0; i < size; i++)
+        {
+            if(array[i] > array[i + 1])
+            {
+                int x = array[i];
+                array[i] = array[i + 1];
+                array[i + 1] = x;
+            }
+        }
+    }
 }
 
 static void shuttleSort(int *array, const int size)
 {
-	// TODO : implement the shuttle sort algorithm
+	/*for(int n = 0; n < size; n++)
+	{
+        for(int i = 0; i < size; i++)
+        {
+            if(array[i] > array[i + 1])
+            {
+                int x = array[i];
+                array[i] = array[i + 1];
+                array[i + 1] = x;
+            }
+        }
+        for(int i = size; i > 0; i--)
+        {
+            if(array[i] < array[i - 1])
+            {
+                int x = array[i];
+                array[i] = array[i - 1];
+                array[i - 1] = x;
+            }
+        }
+	}*/
+
+	for(int i = 0; i < size; i++)
+        {
+            int n = 0;
+            if(array[i] > array[i+1] && i-n > 0)
+            {
+                int x = array[i];
+                array[i] = array[i + 1];
+                array[i + 1] = x;
+                n++;
+                if(array[i-n] > array[i])
+                {
+                    int x = array[i-n];
+                    array[i-n] = array[i];
+                    array[i] = x;
+                }
+            }
+            else if(array[i] > array[i+1])
+            {
+                int x = array[i];
+                array[i] = array[i + 1];
+                array[i + 1] = x;
+            }
+        }
+
 }
 
 static void selectionSort(int *array, const int size)
